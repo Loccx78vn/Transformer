@@ -506,7 +506,7 @@ Như vậy, chúng ta đã lướt sơ qua cách hoạt động và các lưu ý
 </head>
 <body>
     <div class="container">
-        <a href="https://loccx78vn.github.io/Transformer_model/practice.html" class="link" tabindex="0">
+        <a href="https://loccx78vn.github.io/Transformer/practice.html" class="link" tabindex="0">
             Go to Next Page
             <span class="arrow">➔</span>
         </a>
