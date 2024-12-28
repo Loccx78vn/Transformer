@@ -1,4 +1,4 @@
-## Transformer Model Overview
+## Time series forecasting in Transformer model:
 The **Transformer model** is a deep learning architecture introduced in the paper *"Attention Is All You Need"* by Vaswani et al. in 2017. It was designed to address limitations of sequential models like RNNs and LSTMs, especially in tasks involving long-range dependencies and large datasets, such as natural language processing (NLP).
 
 The key components of the Transformer model are:
