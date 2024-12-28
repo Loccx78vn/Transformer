@@ -31,3 +31,6 @@ library(torch)
 5. Evaluate the model and use it for inference.
 
 The `torch` package in R offers flexibility to customize and build complex architectures like the Transformer for a variety of tasks, especially in NLP, and integrates well with other R-based machine learning tools.
+
+
+![](img/background.png)
