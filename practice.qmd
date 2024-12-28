@@ -26,22 +26,24 @@ Còn ở bài viết này, mình chỉ giới thiệu cơ bản cách sử dụn
 Để tải `torch` vào máy local thì bạn sử dụng cú pháp `install.package("torch")`
 :::
 
-### Torch là gì:
+### Torch obejct:
 
-Ở đây, mình sẽ giới thiệu cơ bản để mọi người có kiến thức cơ bản nhất về *torch*
+Ở đây, mình sẽ giới thiệu cơ bản để mọi người có kiến thức cơ bản nhất về *torch*.
 
 Đầu tiên, để dùng package *torch* trong R thì ta cần chuyển đổi object sang class *tensor* thì dùng hàm `torch_tensor()`. Đây là ví dụ về:
 
 ```{r}
 #| warning: false
+#| echo: true
 library(torch)
 m<-torch_tensor(array(1:24, dim = c(4, 3, 2)))
 class(m)
 ```
 
-Ngoài ra, trong object *tensor* còn chứa thêm thông tin khác như là: `$dtype` sẽ return data type (ví dụ như object dưới đây là dạng *long integer*), `$device` return nơi tensor object được lưu trữ, `$shape` return dimensions của object.
+Sau khi chuyển đổi, object *tensor* còn chứa thêm thông tin khác như là: `$dtype` sẽ return data type (ví dụ như object dưới đây là dạng *long integer*), `$device` return nơi tensor object được lưu trữ, `$shape` return dimensions của object.
 
 ```{r}
+#| echo: true
 m$dtype
 m$device
 m$shape
@@ -55,6 +57,35 @@ b <- torch_zeros(1, 1, requires_grad = TRUE)
 y <- x$matmul(w) + b
 head(y)
 ```
+
+### Module:
+
+*Module* là 1 khái niệm quan trọng khi bạn làm việc tới package `torch` và đúng như cái tên của nó, *module* dùng để chứa 1 hoặc nhiều phép tính hoặc bao gồm cả *module* khác (hay còn gọi là submodule). Ví dụ như mô hình bên dưới mình đã tự xây dựng *module* cho *mask self-attention* và bao gồm nó bên trong *module* của *decoder block*.
+
+Khi dùng hàm `nn_module()`, ta cần define 2 phần:
+
+- `initialize`: dùng để define các parameters hoặc submodule cần thiết để *module* hoạt động.
+
+- `forward`: dùng để define cách tính toán của *module* và sẽ hoạt động theo chiều bắt đầu từ trên xuống.
+
+Mình cũng vẽ thêm biểu đồ này để mọi người dễ hiểu cách hoạt động của *module*.
+
+```{=html}
+<div style="text-align: center; margin-bottom: 20px;">
+  <img src="img/module.png" style="max-width: 80%; height: auto; display: block; margin: 0 auto;">
+  
+  <!-- Picture Name -->
+  <div style="text-align: left; margin-top: 10px;">
+    Hình 11: Cách sử dụng module
+  </div>
+  
+  <!-- Source Link -->
+  <div style="text-align: right; font-style: italic; margin-top: 5px;">
+    Source: <a>Created by author</a>
+  </div>
+</div>
+```
+
 
 ### Xây dựng Transformer model với torch:
 
