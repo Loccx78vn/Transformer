@@ -1,4 +1,3 @@
-My goal is to facilitate working with transformer-based models in R using torch to deal with time series forecasting task
 ## What is Transformer:
 The **Transformer model** is a deep learning architecture introduced in the paper *"Attention Is All You Need"* by Vaswani et al. in 2017. It was designed to address limitations of sequential models like RNNs and LSTMs, especially in tasks involving long-range dependencies and large datasets, such as natural language processing (NLP).
 
