@@ -11,78 +11,19 @@ The key components of the Transformer model are:
 
 Transformers are widely used in tasks like language translation, text generation, and more, and are the foundation of models like **BERT**, **GPT**, and **T5**.
 
-### Using `torch` in R to Build a Transformer Model
+## Using `torch` in R to Build a Transformer Model
 
 The **`torch`** package in R is an interface to PyTorch, a deep learning framework, and it provides tools for building, training, and evaluating neural networks, including Transformers.
 
 To use `torch` in R for building a Transformer model, follow these steps:
 
-1. **Install `torch` in R**:
-   First, you need to install the `torch` package. You can do so via CRAN or directly from GitHub:
-   ```r
-   install.packages("torch")
-   ```
-
-2. **Import the Required Libraries**:
-   Load the `torch` package into your R script:
-   ```r
-   library(torch)
-   ```
-
-3. **Prepare the Data**:
-   You need to preprocess your input data (like tokenization for NLP tasks). The data should be in the form of tensors that can be passed into the Transformer model.
-   ```r
-   input_tensor <- torch_tensor(input_data, dtype = torch_float32())
-   target_tensor <- torch_tensor(target_data, dtype = torch_long())
-   ```
-
-4. **Define the Transformer Model**:
-   To build a Transformer in R, you can define it by extending the `nn.Module` class, which is the base class for building neural networks in `torch`.
-
-   Here’s an example of defining a simple Transformer architecture:
-   ```r
-   transformer_model <- nn_module(
-     "TransformerModel",
-     initialize = function(vocab_size, embedding_dim, hidden_dim, num_layers) {
-       self$embedding <- nn_embedding(vocab_size, embedding_dim)
-       self$transformer <- nn_transformer_encoder(
-         nn_transformer_encoder_layer(embedding_dim, num_heads = 8, hidden_dim),
-         num_layers
-       )
-       self$output_layer <- nn_linear(embedding_dim, vocab_size)
-     },
-     forward = function(x) {
-       x <- self$embedding(x)
-       x <- self$transformer(x)
-       output <- self$output_layer(x)
-       return(output)
-     }
-   )
-   ```
-
-5. **Train the Model**:
-   Once the model is defined, you need to specify a loss function and an optimizer. You can use **CrossEntropyLoss** for classification tasks or **MSELoss** for regression, and **Adam** or **SGD** as an optimizer.
-   
-   Example:
-   ```r
-   model <- transformer_model(vocab_size = 10000, embedding_dim = 512, hidden_dim = 512, num_layers = 6)
-   optimizer <- optim_adam(model$parameters, lr = 0.001)
-   loss_fn <- nn_cross_entropy_loss()
-
-   for (epoch in 1:10) {
-     optimizer$zero_grad()
-     output <- model(input_tensor)
-     loss <- loss_fn(output, target_tensor)
-     loss$backward()
-     optimizer$step()
-     cat("Epoch:", epoch, "Loss:", loss$item(), "\n")
-   }
-   ```
-
-6. **Evaluate and Predict**:
-   After training the model, you can evaluate its performance on a validation set or use it for inference to make predictions.
-   
-### Key Steps Summary
+**Install `torch` in R**:
+First, you need to install the `torch` package. You can do so via CRAN or directly from GitHub:
+```r
+install.packages("torch")
+library(torch)
+```
+## Key Steps Summary
 1. Install and load the `torch` package in R.
 2. Preprocess your data into tensors.
 3. Define the Transformer model using `nn.Module`.
